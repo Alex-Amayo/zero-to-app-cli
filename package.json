@@ -1,19 +1,17 @@
 {
-    "name": "zerotoapp-cli",
-    "version": "0.0.2",
-    "description": "CLI tool for creating a new app from the zerotoapp template",
-    "main": "index.js",
+    "name": "zero-to-app",
+    "version": "0.1.2",
     "bin": {
-        "zerotoapp": "./index.js"
+        "zero-to-app": "./index.js"
     },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"No tests specified\" && exit 0"
     },
     "dependencies": {
-        "fs-extra": "^10.0.0",
-        "inquirer": "^10.1.8",
-        "simple-git": "^2.0.0"
+        "colorette": "^2.0.20",
+        "commander": "^9.0.0",
+        "simple-git": "^3.0.0",
+        "update-notifier": "^7.2.0"
     },
-    "author": "Your Name",
     "license": "MIT"
 }
