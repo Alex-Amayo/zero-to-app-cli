@@ -19,38 +19,19 @@ async function checkForUpdates() {
     });
 
     if (notifier.update) {
-      console.log(`A new version (${notifier.update.latest}) is available. Please update with the --update flag.`);
+      console.log(`A new version (${notifier.update.latest}) is available.`);
     }
   } catch (error) {
     console.error(red('Failed to check for updates:'), error.message);
   }
 }
 
-async function updateCLI() {
-  console.log('Updating CLI tool to the latest version...');
-  exec('npm install -g zero-to-app', (error, stdout, stderr) => {
-    if (error) {
-      console.error(red(`Error updating CLI tool: ${error.message}`));
-      process.exit(1);
-    }
-    console.log(stdout);
-    console.error(stderr);
-    console.log(green('CLI tool updated successfully!'));
-  });
-}
-
 const program = new Command();
 program.version(currentVersion);
 
 program
-  .option('--update', 'Update to the latest version of the CLI tool')
   .argument('<appname>', 'Name of the application to create')
   .action(async (appname) => {
-    if (program.update) {
-      await updateCLI();
-      return;
-    }
-
     await checkForUpdates();
 
     const git = simpleGit();
@@ -61,7 +42,7 @@ program
       process.exit(1);
     }
 
-    console.log(`Creating a new Zero To App project in ${blue(targetDir)}...`);
+    console.log(`Creating a new Zero To App project in ${blue(targetDir)} with Zero To App version ${currentVersion}...`);
     try {
       await git.clone('https://github.com/Alex-Amayo/zero-to-app', targetDir);
       
@@ -75,9 +56,15 @@ program
           process.exit(1);
         }
         console.log(stdout);
-        console.error(stderr);
+        stderr.split('\n').forEach(line => {
+          if (line.includes('warning')) {
+            console.log(yellow(line));
+          } else {
+            console.error(line);
+          }
+        });
 
-        console.log(green('Success! Created test at C:\\Users\\alexa\\Documents\\test'));
+        console.log(green('Success! Created the project.'));
         console.log('Inside this directory, you can run several commands:\n');
         
         console.log(cyan('  yarn start'));
