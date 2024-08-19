@@ -50,19 +50,12 @@ program
       process.chdir(targetDir);
 
       console.log('Installing dependencies. This might take a few minutes...');
-      exec('yarn install', (error, stdout, stderr) => {
+      exec('yarn install', (error, stdout) => {
         if (error) {
           console.error(red(`Error installing dependencies: ${error.message}`));
           process.exit(1);
         }
         console.log(stdout);
-        stderr.split('\n').forEach(line => {
-          if (line.includes('warning')) {
-            console.log(yellow(line));
-          } else {
-            console.error(line);
-          }
-        });
 
         console.log(green('Success! Created the project.'));
         console.log('Inside this directory, you can run several commands:\n');
@@ -76,7 +69,8 @@ program
         console.log(cyan('  yarn test'));
         console.log('    Starts the test runner.\n');
         
-        console.log(yellow('Remember to set your environment variables.\n'));
+        console.log(white('Remember to set your environment variables.\n'));
+        console.log('')
         console.log(bold('Build, Launch, iterate!'));
       });
     } catch (error) {
