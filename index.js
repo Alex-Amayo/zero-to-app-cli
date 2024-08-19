@@ -5,7 +5,7 @@ const simpleGit = require('simple-git');
 const path = require('path');
 const fs = require('fs');
 const { exec } = require('child_process');
-const { blue, red, green, cyan, yellow, bold } = require('colorette');
+const { blue, red, green, cyan, white, bold } = require('colorette');
 
 const packageJson = require('./package.json');
 const currentVersion = packageJson.version;
