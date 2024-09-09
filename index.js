@@ -46,12 +46,9 @@ program
     try {
       await git.clone('https://github.com/Alex-Amayo/zero-to-app', targetDir);
       
-      console.log('Navigating to the project directory...');
+      console.log('Navigating to the project directory...\n');
       process.chdir(targetDir);
-
-      console.log('');
-      console.log('Installing dependencies. This might take a few minutes...');
-      console.log('');
+      console.log('Installing dependencies. This might take a few minutes...\n');
       console.log(`Installing ${cyan('react')}, ${cyan('react-native')}, ${cyan('react-native-web')}, ...`);
       console.log('');
       exec('yarn install', (error, stdout) => {
@@ -67,16 +64,19 @@ program
         
         console.log(cyan('  yarn start'));
         console.log('    Starts the development server.\n');
+
+        console.log(cyan('  yarn test <filename>'));
+        console.log('    Runs a jest test with the specified filename.\n');
+
+        console.log(cyan('  yarn lint'));
+        console.log('    Lints your code, checks for coding style and potential errors.\n');
         
         console.log(cyan('  yarn export web'));
         console.log('    Creates a static bundle that you can host on the web.\n');
         
-        console.log(cyan('  yarn start --ios'));
-        console.log('    Starts the test runner.\n');
-        
-        console.log(white('Remember to set your environment variables.\n'));
-        console.log('')
-        console.log(bold('Build, Launch, iterate!'));
+        console.log(green('Remember to set your environment variables.\n\n'));
+
+        console.log(bold('Build, Launch, iterate!\n\n'));
       });
     } catch (error) {
       console.error(red('An error occurred while cloning the repository:'), error.message);
