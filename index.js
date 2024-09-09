@@ -49,7 +49,11 @@ program
       console.log('Navigating to the project directory...');
       process.chdir(targetDir);
 
+      console.log('');
       console.log('Installing dependencies. This might take a few minutes...');
+      console.log('');
+      console.log(`Installing ${cyan('react')}, ${cyan('react-native')}, ${cyan('react-native-web')}, ...`);
+      console.log('');
       exec('yarn install', (error, stdout) => {
         if (error) {
           console.error(red(`Error installing dependencies: ${error.message}`));
@@ -57,16 +61,17 @@ program
         }
         console.log(stdout);
 
-        console.log(green('Success! Created the project.'));
+        console.log(white(appname + ' has been succesfully created in ' + targetDir));
+        console.log('');
         console.log('Inside this directory, you can run several commands:\n');
         
         console.log(cyan('  yarn start'));
         console.log('    Starts the development server.\n');
         
-        console.log(cyan('  yarn build'));
-        console.log('    Bundles the app into static files for production.\n');
+        console.log(cyan('  yarn export web'));
+        console.log('    Creates a static bundle that you can host on the web.\n');
         
-        console.log(cyan('  yarn test'));
+        console.log(cyan('  yarn start --ios'));
         console.log('    Starts the test runner.\n');
         
         console.log(white('Remember to set your environment variables.\n'));

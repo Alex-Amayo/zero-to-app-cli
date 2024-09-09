@@ -1,6 +1,6 @@
 {
     "name": "zero-to-app",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "bin": {
         "zero-to-app": "./index.js"
     },
