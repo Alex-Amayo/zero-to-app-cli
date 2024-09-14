@@ -74,9 +74,9 @@ program
         console.log(cyan('  yarn export web'));
         console.log('    Creates a static bundle that you can host on the web.\n');
         
-        console.log(green('Remember to set your environment variables.\n\n'));
+        console.log(green(`Start by connecting your project to Supabase: `) + white(`https://app.supabase.com/\n`));
 
-        console.log(bold('Build, Launch, iterate!\n\n'));
+        console.log(bold('Build, Launch, iterate!\n'));
       });
     } catch (error) {
       console.error(red('An error occurred while cloning the repository:'), error.message);
