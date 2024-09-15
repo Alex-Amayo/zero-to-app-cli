@@ -44,13 +44,21 @@ program
 
     console.log(`Creating a new Zero To App project in ${blue(targetDir)} with Zero To App version ${currentVersion}...`);
     try {
+      // Clone the template repo
       await git.clone('https://github.com/Alex-Amayo/zero-to-app', targetDir);
-      
+
+      // Remove the .git folder to avoid referencing the template repo
+      const gitDir = path.join(targetDir, '.git');
+      if (fs.existsSync(gitDir)) {
+        fs.rmSync(gitDir, { recursive: true, force: true });
+      }
+
       console.log('Navigating to the project directory...\n');
       process.chdir(targetDir);
       console.log('Installing dependencies. This might take a few minutes...\n');
-      console.log(`Installing ${cyan('react')}, ${cyan('react-native')}, ${cyan('react-native-web')}, ...`);
-      console.log('');
+      console.log(`Installing ${cyan('react')}, ${cyan('react-native')}, ${cyan('react-native-web')}, ...\n`);
+      
+      // Install dependencies using yarn
       exec('yarn install', (error, stdout) => {
         if (error) {
           console.error(red(`Error installing dependencies: ${error.message}`));
@@ -58,8 +66,7 @@ program
         }
         console.log(stdout);
 
-        console.log(white(appname + ' has been succesfully created in ' + targetDir));
-        console.log('');
+        console.log(white(appname + ' has been successfully created in ' + targetDir));
         console.log('Inside this directory, you can run several commands:\n');
         
         console.log(cyan('  yarn start'));
